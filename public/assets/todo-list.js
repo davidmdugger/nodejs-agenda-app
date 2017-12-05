@@ -1,0 +1,33 @@
+$(document).ready(function(){
+
+  $('form').on('submit', function(){ // when submit event on the form is triggered
+
+      var item = $('form input'); // assign user's input to item
+      var todo = {item: item.val()}; // item.val() is the value set to the item key, and that object is assigned to todo
+
+      $.ajax({
+        type: 'POST',
+        url: '/todos',
+        data: todo,
+        success: function(data){
+          //do something with the data via front-end framework
+          location.reload();
+        }
+      });
+
+      return false;
+
+  });
+
+  $('li').on('click', function(){
+      var item = $(this).text().replace(/ /g, "-");
+      $.ajax({
+        type: 'DELETE',
+        url: '/todos/' + item,
+        success: function(data){
+          //do something with the data via front-end framework
+          location.reload();
+        }
+      });
+  });
+});
