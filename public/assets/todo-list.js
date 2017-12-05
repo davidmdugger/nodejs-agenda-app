@@ -10,22 +10,23 @@ $(document).ready(function(){
         url: '/todos',
         data: todo,
         success: function(data){
-          //do something with the data via front-end framework
+          //reload the data via front-end framework
           location.reload();
         }
       });
-
       return false;
-
   });
 
+  // when the list item is clicked
   $('li').on('click', function(){
+      // replace spaces with dashes
       var item = $(this).text().replace(/ /g, "-");
       $.ajax({
+        // delete the item
         type: 'DELETE',
         url: '/todos/' + item,
         success: function(data){
-          //do something with the data via front-end framework
+          // reload the data via front-end framework
           location.reload();
         }
       });
